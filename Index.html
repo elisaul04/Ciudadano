@@ -32,6 +32,98 @@
                       </ul>
                     </div>
                   </nav>
-    
+
+        <container>           
+            <div class="row">
+                <div class="form-group col-md-12">
+                  <label for="comment">Commentario</label>
+                  <textarea class="form-control" rows="2" id="comment"></textarea>
+                </div>
+               </div>
+                <div class="row" >
+              <div class="form-group col-md-4">
+                <label>Latitud </label>
+                <input type="text" id="txtLatitud" class="form-control">
+               </div>
+               <div class="form-group col-md-4">
+                <label>Longitud </label>
+                <input type="text" id="txtLongitd" class="form-control">
+               </div>
+               <div class="form-group col-md-4">
+                  <label for="inputFile">Cargar Evidencia</label>
+                  <input type="file" class="form-control-file" id="evidencia" >           
+                </div>    
+          </div>
+          <div class="row">
+               
+              <div id="map" style="width:100%; height: 400px;"></div>
+              
+              
+          </div>
+      
+         <p>
+          <input type="button" value="Enviar" style="margin-top: 10px" class="btn btn-success">
+         </p>
+        
+         <div class="row" >
+          <div class="form-control ">
+                  <label>Titulo</label>
+                  <input type="text" id ="txtNombre" class="form-control">
+                  <label for="comment">Commentario</label>
+              <textarea class="form-control" rows="3" id="comment"></textarea>    
+              <p >
+                <input type="button" value="Enviar" style="margin-top: 10px" class="btn btn-success">
+               </p>         
+          </div>
+        
+           
+        </div>
+      
+        </container>
+      </div>
 </body>
 </html>
+<script>
+      function successFunction(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        myMap(lat,long)
+    }   
+    function errorFunction(position) {
+	alert('Error!');
+}
+  if (navigator.geolocation) {
+	      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+        } else {
+	      alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+    }
+    function myMap(lat,long) {      
+
+       var myLatLng = {lat: lat, lng:long};//{lat: 18.473807, lng:-69.913407};
+       var myLatLng2 = {lat: 18.4506418, lng:-69.96824730000003};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+             center: myLatLng
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Ubicacion'
+        });
+        google.maps.event.addListener(map, "click", function (e) {
+      
+        document.getElementById("txtLatitud").value =e.latLng.lat();
+        document.getElementById("txtLongitd").value=e.latLng.lng();
+     });
+/*
+
+        var marker = new google.maps.Marker({
+            position: myLatLng2,
+            map: map,
+            title: 'Apec'
+        });
+            */ 
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>
+ 
