@@ -1,137 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-        <header>
-        <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Bienvenido!!!</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                      <ul class="navbar-nav">
-                        <li class="nav-item active">
-                          <a class="nav-link" href="" onclick="getSectionToDisplay('hola')">Registrar Problematica <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="">Casos Resueltos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Contactos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Login</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
-        <container>           
-            <div class="row">
-                <div class="form-group col-md-12">
-                  <label for="comment">Commentario</label>
-                  <textarea class="form-control" rows="2" id="comment"></textarea>
-                </div>
-               </div>
-                <div class="row" >
-              <div class="form-group col-md-4">
-                <label>Latitud </label>
-                <input type="text" id="txtLatitud" class="form-control">
-               </div>
-               <div class="form-group col-md-4">
-                <label>Longitud </label>
-                <input type="text" id="txtLongitd" class="form-control">
-               </div>
-               <div class="form-group col-md-4">
-                  <label for="inputFile">Cargar Evidencia</label>
-                  <input type="file" class="form-control-file" id="evidencia" >           
-                </div>    
-          </div>
-          <div class="row">
-               
-              <div id="map" style="width:100%; height: 400px;"></div>
-              
-              
-          </div>
-      
-         <p>
-          <input type="button" value="Enviar" style="margin-top: 10px" class="btn btn-success">
-         </p>
-        
-         <div class="row" >
-          <div class="form-control ">
-                  <label>Titulo</label>
-                  <input type="text" id ="txtNombre" class="form-control">
-                  <label for="comment">Commentario</label>
-              <textarea class="form-control" rows="3" id="comment"></textarea>    
-              <p >
-                <input type="button" value="Enviar" style="margin-top: 10px" class="btn btn-success">
-               </p>         
-          </div>
-        
-           
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Bienvenido!!!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="" onclick="getSectionToDisplay('hola')">Registrar Problematica
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Casos Resueltos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Contactos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Login</a>
+            </li>
+          </ul>
         </div>
-      
-        </container>
-      </div>
+      </nav>
+
+      <container>
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <th>Usuario</th>
+              <th>Titulo</th>
+              <th>Ubicación</th>
+              <th>Fecha</th>
+            </thead>
+            <tbody id="tblCasos">
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="titulo">Titulo</label>
+            <input type="text" id="txtTitulo" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="comment">Commentario</label>
+            <textarea class="form-control" rows="2" id="txtComentario"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label>Latitud </label>
+            <input type="text" id="txtLatitud" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label>Longitud </label>
+            <input type="text" id="txtLongitud" class="form-control">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputFile">Cargar Evidencia</label>
+            <input type="file" class="form-control-file" id="evidencia">
+          </div>
+        </div>
+        <div class="row">
+          <div id="map" style="width:100%; height: 400px;"></div>
+        </div>
+
+        <p>
+          <input type="button" value="Registrar" onclick="InsertCaso()" style="margin-top: 10px" class="btn btn-success">
+        </p>
+ 
+        <!-- <div class="row">
+          <div class="form-control ">
+            <label>Titulo</label>
+            <input type="text" id="txtTitulo" class="form-control">
+            <label for="txtDescripcion">Descripcion</label>
+            <textarea class="form-control" rows="3" id="txtDescripcion"></textarea>
+            <p>
+              <input type="button" value="Enviar" style="margin-top: 10px" class="btn btn-success">
+            </p>
+          </div>
+        </div> -->
+
+      </container>
+    </div>
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-<script
-			  src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script src="index.js"></script>
 <script>
-    function successFunction(position) {
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      myMap(lat,long)
-  }   
-  function errorFunction(position) {
-alert('Error!');
-}
-if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-      } else {
-      alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+  function successFunction(position) {
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+     myMap(lat, long)
   }
-  function myMap(lat,long) {      
+  function errorFunction(position) {
+    alert('Error!');
+  }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+  } else {
+    alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+  }
+  function myMap(lat, long) {
 
-     var myLatLng = {lat: lat, lng:long};//{lat: 18.473807, lng:-69.913407};
-     var myLatLng2 = {lat: 18.4506418, lng:-69.96824730000003};
-      var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-           center: myLatLng
-      });
-      var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Ubicacion'
-      });
-      google.maps.event.addListener(map, "click", function (e) {
-    
-      document.getElementById("txtLatitud").value =e.latLng.lat();
-      document.getElementById("txtLongitd").value=e.latLng.lng();
-   });
-/*
+    var myLatLng = { lat: lat, lng: long };//{lat: 18.473807, lng:-69.913407};
+    var myLatLng2 = { lat: 18.4506418, lng: -69.96824730000003 };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: myLatLng
+    });
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: 'Ubicacion'
+    });
+    google.maps.event.addListener(map, "click", function (e) {
 
-      var marker = new google.maps.Marker({
-          position: myLatLng2,
-          map: map,
-          title: 'Apec'
-      });
-          */ 
+      document.getElementById("txtLatitud").value = e.latLng.lat();
+      document.getElementById("txtLongitud").value = e.latLng.lng();
+    });
+
   }
 </script>
 
-
-
 </html>
+<script src="firebase.js"></script>
+<script src="caso.js"></script>
+<script src="contacto.js"></script>
