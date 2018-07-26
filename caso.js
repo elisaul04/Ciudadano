@@ -21,8 +21,7 @@ function InsertCaso() {
     var Key = firebase.database().ref().child('Casos').push().key;
     var updates = {};
 
-    updates['/Casos/' + Key] = caso;
-    firebase.database().ref().update(updates);
+
 
     // var result = firebase.database().ref().child("Casos");
     // result.push(caso);
@@ -59,12 +58,14 @@ function InsertCaso() {
             .then(snapshot => snapshot.ref.getDownloadURL())
             .then((url) => {
                 console.log(url);
-                firebase.database().ref().child('Casos/')
-                .update({ Titulo: "Elis" });
+                //firebase.database().ref().child('Casos/')
+              //  .update({ Titulo: "Elis" });
+              caso.Evidencia = url;   
+              updates['/Casos/' + Key] = caso;
+              firebase.database().ref().update(updates);         
             })
             .catch(console.error);
     }
-    var links = [];
 
  
 
@@ -102,6 +103,9 @@ function CargarCasos() {
                 td.innerHTML = item.val().Fecha;
                 tr.appendChild(td);
 
+                td = _dce('td');
+                td.innerHTML =  "<image  style='height:80px' src="+ item.val().Evidencia+" >"
+                tr.appendChild(td);
                 destino.appendChild(tr);
             });
         }).then(function () {
