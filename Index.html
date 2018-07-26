@@ -84,7 +84,7 @@
         <p>
           <input type="button" value="Registrar" onclick="InsertCaso()" style="margin-top: 10px" class="btn btn-success">
         </p>
- 
+
         <!-- <div class="row">
           <div class="form-control ">
             <label>Titulo</label>
@@ -107,37 +107,83 @@
   crossorigin="anonymous"></script>
 <script src="index.js"></script>
 <script>
+
+
+
   function successFunction(position) {
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
-     myMap(lat, long)
+    myMap(lat, long)
   }
   function errorFunction(position) {
     alert('Error!');
   }
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-  } else {
-    alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
   }
   function myMap(lat, long) {
 
-    var myLatLng = { lat: lat, lng: long };//{lat: 18.473807, lng:-69.913407};
-    var myLatLng2 = { lat: 18.4506418, lng: -69.96824730000003 };
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: myLatLng
-    });
-    var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      title: 'Ubicacion'
-    });
-    google.maps.event.addListener(map, "click", function (e) {
+    var markers = [];
+    var myLocation = { lat: lat, lng: long };
 
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: myLocation
+    });
+    addMarker(myLocation)
+    //showMarkers();
+
+    function addMarker(location) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+      markers.push(marker);
+    }
+
+    function setMapOnAll(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+
+      }
+    }
+
+    function clearMarkers() {
+      setMapOnAll(null);
+    }
+    function deleteMarkers() {
+      clearMarkers();
+      markers = [];
+    }
+    function showMarkers() {
+      setMapOnAll(map);
+    }
+
+    google.maps.event.addListener(map, "click", function (e) {
       document.getElementById("txtLatitud").value = e.latLng.lat();
       document.getElementById("txtLongitud").value = e.latLng.lng();
+      let newLocation = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+      clearMarkers();
+      addMarker(newLocation)
     });
+
+    CargarMarkers = function () {
+      var query = firebase.database().ref("Casos").limitToFirst(20);
+      query.once("value")
+        .then(function (snapshot) {
+          snapshot.forEach(function (item) {
+            var location = {
+              lat: parseFloat(item.val().Latitud),
+              lng: parseFloat(item.val().Longitud)
+            };
+            // alert(JSON.stringify(location))
+            addMarker(location)
+
+          });
+          showMarkers();
+        })
+    }
+    CargarMarkers();
 
   }
 </script>

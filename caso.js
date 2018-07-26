@@ -18,14 +18,60 @@ function InsertCaso() {
     };
     // var result = firebase.database().ref("Casos/"+2);
     // result.set(caso);
-    // var Key = firebase.database().ref().child('Casos').push().key;
-    // var updates = {};
-    // updates['/Casos/' + Key] = caso;  
-    // firebase.database().ref().update(updates);
-    var result = firebase.database().ref().child("Casos");
-    result.push(caso);
+    var Key = firebase.database().ref().child('Casos').push().key;
+    var updates = {};
+
+    updates['/Casos/' + Key] = caso;
+    firebase.database().ref().update(updates);
+
+    // var result = firebase.database().ref().child("Casos");
+    // result.push(caso);
+
+    // var storageRef = firebase.storage().ref('some/storage/bucket');
+    // var saveDataRef = firebase.database().ref('users/');
+    // var f = GetValueControlById("evidencia");
+    // var uploadTask = storageRef.put(f);
+
+    // uploadTask.on('state_changed', (err) => {
+    //     console.log('Upload error:', err);
+    // }, () => {
+    //     saveDataRef.update({
+    //         name: 'alex',
+    //         age: 23,
+    //         profession: 'superhero',
+    //         image: uploadTask.snapshot.downloadURL
+    //     });
+    // });
+    var f = GetValueControlById("evidencia");
+    const file = document.querySelector('#evidencia').files[0]
+
+    loadI()
+
+    function loadI() {
+        const ref = firebase.storage().ref();
+        const file = document.querySelector('#evidencia').files[0]
+        const name = (+new Date()) + '-' + file.name;
+        const metadata = {
+            contentType: file.type
+        };
+        const task = ref.child(name).put(file, metadata);
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then((url) => {
+                console.log(url);
+                firebase.database().ref().child('Casos/')
+                .update({ Titulo: "Elis" });
+            })
+            .catch(console.error);
+    }
+    var links = [];
+
+ 
+
+
     alert("Saved")
 }
+
 function _dce(el) {
     return document.createElement(el);
 }
@@ -63,3 +109,4 @@ function CargarCasos() {
         });
 
 }
+
