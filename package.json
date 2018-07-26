@@ -1,0 +1,19 @@
+{
+  "name": "ciudadano",
+  "version": "1.0.0",
+  "description": "playing around with some javascript feacture",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elisaul04/Ciudadano.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elisaul04/Ciudadano/issues"
+  },
+  "homepage": "https://github.com/elisaul04/Ciudadano#readme"
+}

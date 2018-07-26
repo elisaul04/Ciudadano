@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-        
+        <header>
         <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="#">Bienvenido!!!</a>
@@ -18,7 +18,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                       <ul class="navbar-nav">
                         <li class="nav-item active">
-                          <a class="nav-link" href="">Registrar Problematica <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="" onclick="getSectionToDisplay('hola')">Registrar Problematica <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="">Casos Resueltos</a>
@@ -82,48 +82,56 @@
         </container>
       </div>
 </body>
-</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="index.js"></script>
 <script>
-      function successFunction(position) {
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
-        myMap(lat,long)
-    }   
-    function errorFunction(position) {
-	alert('Error!');
+    function successFunction(position) {
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
+      myMap(lat,long)
+  }   
+  function errorFunction(position) {
+alert('Error!');
 }
-  if (navigator.geolocation) {
-	      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-        } else {
-	      alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
-    }
-    function myMap(lat,long) {      
+if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+      } else {
+      alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+  }
+  function myMap(lat,long) {      
 
-       var myLatLng = {lat: lat, lng:long};//{lat: 18.473807, lng:-69.913407};
-       var myLatLng2 = {lat: 18.4506418, lng:-69.96824730000003};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-             center: myLatLng
-        });
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Ubicacion'
-        });
-        google.maps.event.addListener(map, "click", function (e) {
-      
-        document.getElementById("txtLatitud").value =e.latLng.lat();
-        document.getElementById("txtLongitd").value=e.latLng.lng();
-     });
+     var myLatLng = {lat: lat, lng:long};//{lat: 18.473807, lng:-69.913407};
+     var myLatLng2 = {lat: 18.4506418, lng:-69.96824730000003};
+      var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+           center: myLatLng
+      });
+      var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Ubicacion'
+      });
+      google.maps.event.addListener(map, "click", function (e) {
+    
+      document.getElementById("txtLatitud").value =e.latLng.lat();
+      document.getElementById("txtLongitd").value=e.latLng.lng();
+   });
 /*
 
-        var marker = new google.maps.Marker({
-            position: myLatLng2,
-            map: map,
-            title: 'Apec'
-        });
-            */ 
-    }
+      var marker = new google.maps.Marker({
+          position: myLatLng2,
+          map: map,
+          title: 'Apec'
+      });
+          */ 
+  }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>
- 
+
+
+
+</html>
