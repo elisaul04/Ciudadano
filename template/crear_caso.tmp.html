@@ -1,0 +1,118 @@
+<div id="crear_caso">
+  <div class="row">
+   <div class="form-group col-md-12">
+     <label for="titulo">Titulo</label>
+     <input type="text" id="txtTitulo" class="form-control">
+   </div>
+  </div>
+  <div class="row">
+        <div class="form-group col-md-12">
+          <label for="comment">Commentario</label>
+          <textarea class="form-control" rows="2" id="txtComentario"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label>Tipo </label>
+          <select class="form-control"></select>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Latitud </label>
+          <input type="text" id="txtLatitud" class="form-control">
+        </div>
+        <div class="form-group col-md-3">
+          <label>Longitud </label>
+          <input type="text" id="txtLongitud" class="form-control">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputFile">Cargar Evidencia</label>
+          <input type="file" class="form-control-file" id="evidencia">
+        </div>
+      </div>
+      <div class="row">
+        <div id="map" style="width:100%; height: 400px;"></div>
+      </div>
+
+      <p>
+        <input type="button" value="Registrar" onclick="InsertCaso()" style="margin-top: 10px" class="btn btn-success">
+      </p>
+</div>
+
+<script>
+  function myMap(lat, long) {
+    var markers = [];
+    var myLocation = { lat: lat, lng: long };
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13,
+      center: myLocation
+    });
+    addMarker(myLocation);
+    showMarkers();
+
+    function addMarker(location) {
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+      markers.push(marker);
+    }
+
+    function setMapOnAll(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+
+    function clearMarkers() {
+      setMapOnAll(null);
+    }
+    function deleteMarkers() {
+      clearMarkers();
+      markers = [];
+    }
+    function showMarkers() {
+      setMapOnAll(map);
+    }
+
+     google.maps.event.addListener(map, "click", function (e) {
+      document.getElementById("txtLatitud").value = e.latLng.lat();
+      document.getElementById("txtLongitud").value = e.latLng.lng();
+      let newLocation = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+      clearMarkers();
+      addMarker(newLocation)
+    });
+
+    CargarMarkers = function () {
+      var query = firebase.database().ref("Casos").limitToFirst(20);
+      query.once("value")
+        .then(function (snapshot) {
+          snapshot.forEach(function (item) {
+            var location = {
+              lat: parseFloat(item.val().Latitud),
+              lng: parseFloat(item.val().Longitud)
+            };
+            // alert(JSON.stringify(location))
+            addMarker(location)
+
+          });
+          showMarkers();
+        })
+    }
+    CargarMarkers();
+  }
+
+  function successFunction(position) {
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    myMap(lat, long);
+  }
+  function errorFunction(position) {
+    alert('Error!');
+  }
+  if (navigator.geolocation) {
+    console.log('cre map')
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>

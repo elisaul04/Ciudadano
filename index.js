@@ -1,11 +1,20 @@
 
 
 function getSectionToDisplay(section) {
-    //preventDefault();
-    console.log(document.templates);
-    let usertmp = document.templates['usuario_temp.tmp'];
+    let usertmp;
+    $('#main_container').html('<div></div>')
+    switch(section) {
+        case 'crear_caso':
+          usertmp = document.templates['crear_caso.tmp'];
+        break;
+       
+        case 'lista_casos':
+          usertmp = document.templates['lista_casos.tmp'];
+        break;
+        default:
+        break;
+    }
+    console.log(usertmp);
+  
     $('#main_container').append(usertmp);
-    console.log('user ', usertmp);
-  // console.log('import' in document.createElement('link'));
-  // event.preventDefault();
 }
