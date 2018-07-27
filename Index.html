@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <head>
   <meta charset="UTF-8">
@@ -65,15 +66,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
+            <label>Tipo </label>
+            <select class="form-control"></select>
+          </div>
+          <div class="form-group col-md-3">
             <label>Latitud </label>
             <input type="text" id="txtLatitud" class="form-control">
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label>Longitud </label>
             <input type="text" id="txtLongitud" class="form-control">
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="inputFile">Cargar Evidencia</label>
             <input type="file" class="form-control-file" id="evidencia">
           </div>
@@ -97,7 +102,9 @@
             </p>
           </div>
         </div> -->
-
+        <div style="height: 100px;width:250px">
+          <canvas id="grafica"></canvas>
+        </div>
       </container>
     </div>
 </body>
@@ -193,3 +200,4 @@
 <script src="firebase.js"></script>
 <script src="caso.js"></script>
 <script src="contacto.js"></script>
+<script src="admin.js"></script>

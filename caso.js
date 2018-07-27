@@ -14,7 +14,8 @@ function InsertCaso() {
         Longitud: longitud,
         Latitud: latitud,
         Titulo: titulo,
-        Fecha: today
+        Fecha: today,
+        TipoCaso : 1,
     };
     // var result = firebase.database().ref("Casos/"+2);
     // result.set(caso);
@@ -81,7 +82,7 @@ function CargarCasos() {
     var destino = document.getElementById("tblCasos")
     destino.innerHTML = "";
 
-    var query = firebase.database().ref("Casos").limitToFirst(20);
+    var query = firebase.database().ref("Casos").limitToFirst(15);
     query.once("value")
         .then(function (snapshot) {
             snapshot.forEach(function (item) {
