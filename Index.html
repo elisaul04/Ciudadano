@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <lint rel="import" href="./usuario_temp.html"/>
    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <title>Document</title>
 </head>
 <body>
+  <button type="button" onclick="getSectionToDisplay('hola')">click</button>
         <header>
         <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +20,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                       <ul class="navbar-nav">
                         <li class="nav-item active">
-                          <a class="nav-link" href="" onclick="getSectionToDisplay('hola')">Registrar Problematica <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="" >Registrar Problematica <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="">Casos Resueltos</a>
@@ -34,7 +36,7 @@
                   </nav>
                   </div>
               </header>
-              <div id="body"></div>
+              <div id="main_container"></div>
               <footer>
                 This is the footer section
               </footer>
@@ -45,5 +47,6 @@
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-<script src="index.js"></script>
+<script src="./tmp/templates.js"></script>
+<script src="./index.js"></script>
 </html>
