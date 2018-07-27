@@ -84,8 +84,8 @@ function CargarCasos() {
 
     var query = firebase.database().ref("Casos").limitToFirst(15);
     query.once("value")
-        .then(function (snapshot) {
-            snapshot.forEach(function (item) {
+        .then(function (result) {
+            result.forEach(function (item) {
                 tr = _dce('tr');
                 td = _dce('td');
 

@@ -91,17 +91,28 @@
           <input type="button" value="Registrar" onclick="InsertCaso()" style="margin-top: 10px" class="btn btn-success">
         </p>
 
-        <!-- <div class="row">
+        <div class="row">
           <div class="form-control ">
             <label>Titulo</label>
-            <input type="text" id="txtTitulo" class="form-control">
-            <label for="txtDescripcion">Descripcion</label>
-            <textarea class="form-control" rows="3" id="txtDescripcion"></textarea>
+            <input type="text" id="txtTituloMensaje" class="form-control">
+            <label for="txtDescripcion">Descripción</label>
+            <textarea class="form-control" rows="3" id="txtDescripcionMensaje"></textarea>
             <p>
-              <input type="button" value="Enviar" style="margin-top: 10px" class="btn btn-success">
+              <input type="button" value="Enviar" onclick="EnviarMensaje()" style="margin-top: 10px" class="btn btn-success">
             </p>
           </div>
-        </div> -->
+        </div>
+        <div class="row">
+          <table class="table table-striped">
+            <thead>
+              <th>Titulo</th>
+              <th>Fecha</th>
+              <th>Descripción</th>              
+            </thead>
+            <tbody id="tblMensajes">
+            </tbody>
+          </table>
+        </div>
         <div style="height: 100px;width:250px">
           <canvas id="grafica"></canvas>
         </div>
