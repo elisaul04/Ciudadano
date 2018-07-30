@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="Styles.css">
+<meta charset="utf-8">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+
+<body>
+    <div id="menu">
+
+    </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center text-white mb-4">Bootstrap 4 Login Form</h2>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+
+                        <!-- form card login -->
+                        <div class="card rounded-0">
+                            <div class="card-header">
+                                <h3 class="mb-0">Login</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                                    <div class="form-group">
+                                        <label for="uname1">Username or Email</label>
+                                        <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="UserName" required="">
+                                        <div class="invalid-feedback">Oops, you missed this one.</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control form-control-lg rounded-0" id="Password" required="" autocomplete="new-password">
+                                        <div class="invalid-feedback">Enter your password too!</div>
+                                    </div>
+                                    <div>
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-success btn-lg float-right" onclick="LoginUser()" id="btnLogin">Login</button>
+                                </div>
+                            </div>
+                            <!--/card-block-->
+                        </div>
+                        <!-- /form card login -->
+
+                    </div>
+
+
+                </div>
+                <!--/row-->
+
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+    </div>
+</body>
+
+</html>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+<script src="firebaseConfig.js"></script>
+
+<script src="master.js"></script>
+<script src="login.js"></script>

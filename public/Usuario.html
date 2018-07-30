@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="Styles.css">
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Usuario</title>
+</head>
+
+<body>
+    <div id="menu">
+
+    </div>
+    <div class="container mt-3">
+        <h2>Bienvenido
+            <label id="currentUser"></label>
+            <a href="#" onclick="Salir()" class="btn btn-success">Salir</a>
+        </h2>
+
+        <br>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home">Registrar Casos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu1">Casos Creados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu2">Cambiar Clave</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu3">Enviar Mensaje</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="home" class="container tab-pane active">
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div id="map" style="width:100%; height: 200px;"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" id="txtTitulo" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="comment">Commentario</label>
+                        <textarea class="form-control" rows="2" id="txtComentario"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>Tipo </label>
+                        <select class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Latitud </label>
+                        <input type="text" id="txtLatitud" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Longitud </label>
+                        <input type="text" id="txtLongitud" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputFile">Cargar Evidencia</label>
+                        <input type="file" class="form-control-file" id="evidencia">
+                    </div>
+                </div>
+                <p>
+                    <input type="button" value="Registrar" onclick="InsertCaso()" style="margin-top: 10px" class="btn btn-success">
+                </p>
+
+            </div>
+            <div id="menu1" class="container tab-pane fade">
+                <br>
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Usuario</th>
+                            <th>Titulo</th>
+                            <th>Ubicación</th>
+                            <th>Fecha</th>
+                            <th>Evidencia</th>
+                        </thead>
+                        <tbody id="tblCasosCreados">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu2" class="container tab-pane fade">
+                <br>
+                <div class="row">
+                    <div class="form-control ">
+                        <label>Contrasena Anterior</label>
+                        <input type="password" id="txtContrasenaAnterior" class="form-control">
+                        <label>Nueva Contrasena</label>
+                        <input type="password" id="txtNuevaContrasena" class="form-control">
+                        <label for="txtDescripcion">Confirmacion Contrasena </label>
+                        <input class="form-control" type="password" id="txtConfirmacionContrasena">
+                        </input>
+                        <p>
+                            <input type="button" value="Cambiar" onclick="ResetPasswod()" style="margin-top: 10px" class="btn btn-success">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="menu3" class="container tab-pane fade">
+                <br>
+
+                <div class="row">
+                    <div class="form-control ">
+                        <label>Titulo</label>
+                        <input type="text" id="txtTituloMensaje" class="form-control">
+                        <label for="txtDescripcion">Descripción</label>
+                        <textarea class="form-control" rows="3" id="txtDescripcionMensaje"></textarea>
+                        <p>
+                            <input type="button" value="Enviar" onclick="EnviarMensaje()" style="margin-top: 10px" class="btn btn-success">
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Titulo</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                        </thead>
+                        <tbody id="tblMensajes">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+<script src="firebaseConfig.js"></script>
+
+<script src="master.js"></script>
+<script src="master.js"></script>
+<script src="usuario.js"></script>

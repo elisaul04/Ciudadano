@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="Styles.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="menu">
+  </div>
+
+
+  <div class="container mt-3">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" id="divCarouselConfiguration">
+
+      </div>
+
+
+      <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <th>Usuario</th>
+          <th>Titulo</th>
+          <th>Fecha</th>
+          <th>Evidencia</th>
+          <th></th>
+        </thead>
+        <tbody id="tblCasos">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  
+  <div class="container">
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+         
+          <div class="modal-header">
+            <h4 class="modal-title">Detalle Caso</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+         
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <label>Usuario</label>
+                <input type="text" class="form-control" readonly id="txtUsuarioDetalle" id="first">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Titulo</label>
+                <input type="text" class="form-control" readonly name="txtTituloDetalle" id="first">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Fecha</label>
+                <input type="text" class="form-control" readonly name="txtFechaDetalle" id="first">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <label>Descripción</label>
+                <textarea class="form-control" rows="3" id="txtDescripcionDetalle"></textarea>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </container>
+  </div>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMc06HQwXKYGd9HQ6lAbS96vNggKACxKE&callback=myMap"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+
+</html>
+<script src="firebaseConfig.js"></script>
+
+<script src="index.js"></script>
+<script src="master.js"></script>
+<script src="caso.js"></script>
+<script src="contacto.js"></script>
