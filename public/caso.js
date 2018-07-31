@@ -4,18 +4,32 @@ window.onload = function (e) {
 }
 
 
-function DetalleCaso(i) {
-    // alert(item)
-    frebase.database.ref('Casos').child(i)
-        .once('value')
-        .then(function (snapshot) {
-            var value = snapshot.val();
-            console.log('Casos:', value.Usuario);
-            resp.json(value.Usuario);
-        })
-        .catch(next);
-    //const location = $firebaseObject(item);
-    //alert(location)
+function DetalleCaso(key) {
+    var query = firebase.database().ref("Casos").orderByChild("Usuario").equalTo(key);
+    query.on('value', function (snapshot) {
+        //snapshot would have list of NODES that satisfies the condition
+        // alert(JSON.stringify(snapshot.val()))
+
+        snapshot.forEach(function (result) {
+            // var key = childSnapshot.key;
+            document.getElementById("txtUsuarioDetalle").value = result.val().Usuario;
+            document.getElementById("txtTituloDetalle").value = result.val().Titulo;
+            document.getElementById("txtFechaDetalle").value = result.val().Fecha;
+            document.getElementById("txtDescripcionDetalle").value = result.val().Comentario;
+        });
+
+    });
+    // firebase.database().ref('Casos')
+    //     .orderByChild('Usuario')
+    //     .startAt(null, key)   // this is the key of the 3rd matching record.
+    //     .limitToFirst(3)
+    //     .once('chield', function (snapshot) {
+    //         var key = snapshot.key;
+    //         var data = snapshot.val();
+    //         // console.log(key + ': ' + JSON.stringify(data))
+    //         alert(JSON.stringify(data))
+    //     })
+
     $("#myModal").modal('show');
 
 }
@@ -51,7 +65,8 @@ function CargarCasos() {
                 tr.appendChild(td);
 
                 td = _dce("td");
-                td.innerHTML = '<button data-toggle="modal" data-target="#myModal" class="btn btn-success"  onclick=DetalleCaso(' + item.key + ')>Ver Detalle</button>';
+                let llave = item.val().Usuario;
+                td.innerHTML = `<button data-toggle="modal" data-target='#myModal' class='btn btn-success'  onclick=DetalleCaso("${llave}")>Ver Detalle</button>`;
                 tr.appendChild(td);
                 destino.appendChild(tr);
             });

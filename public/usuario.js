@@ -108,6 +108,9 @@ function ResetPasswod() {
         alert("La contrasena y la confirmacion debe ser la misma")
     }
 }
+function GetValueControlById(el) {
+    return document.createElement(el);
+}
 function InsertCaso() {
     let comentario = GetValueControlById("txtComentario");
     let longitud = GetValueControlById("txtLongitud");
@@ -152,13 +155,14 @@ function InsertCaso() {
             .catch(console.error);
     }
 
-    alert("Saved")
+    alert("Guardado Sastifactoriamente")
 }
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         var currentUser = firebase.auth().currentUser;
         if (user != null) {
             document.getElementById("currentUser").innerHTML = currentUser.email;
+            CargarCasos(currentUser.email);
         } else {
             window.location = "Login.html";
         }
@@ -187,18 +191,20 @@ function EnviarMensaje() {
 
     alert("Enviado Exitosamente")
 }
-
+var us = document.getElementById("currentUser").innerHTML;
 function ListarMesaje() {
 
     var destinoMesaje = document.getElementById("tblMensajes")
     destinoMesaje.innerHTML = "";
 
-    var query = firebase.database().ref("Mensajes").limitToFirst(10);
+    //var query = firebase.database().ref("Mensajes").limitToFirst(10);
+    var query = firebase.database().ref("Mensajes");
+
     query.once("value")
         .then(function (result) {
             result.forEach(function (item) {
                 tr = _dce('tr');
-                
+
 
                 td = _dce('td');
                 td.innerHTML = item.val().Titulo;
@@ -218,40 +224,49 @@ function ListarMesaje() {
         });
 
 }
-function CargarCasos() {
-
+function CargarCasos(user) {
+ 
     var destino = document.getElementById("tblCasosCreados")
     destino.innerHTML = "";
+ 
+    var query = firebase.database().ref("Casos").orderByChild("Usuario").equalTo(user);
+    query.on('value', function (snapshot) {
 
-    var query = firebase.database().ref("Casos").limitToFirst(15);
-    query.once("value")
-        .then(function (result) {
-            result.forEach(function (item) {
-                tr = _dce('tr');
-                td = _dce('td');
+        snapshot.forEach(function (item) {
+            tr = _dce('tr');
+            td = _dce('td');
 
-                td.innerHTML = item.val().Usuario;
-                tr.appendChild(td);
+            td.innerHTML = item.val().Usuario;
+            tr.appendChild(td);
 
-                td = _dce('td');
-                td.innerHTML = item.val().Titulo;
-                tr.appendChild(td);
+            td = _dce('td');
+            td.innerHTML = item.val().Titulo;
+            tr.appendChild(td);
 
 
-                td = _dce('td');
-                td.innerHTML = item.val().Fecha;
-                tr.appendChild(td);
+            td = _dce('td');
+            td.innerHTML = item.val().Fecha;
+            tr.appendChild(td);
 
-                td = _dce('td');
-                td.innerHTML = "<image  style='height:80px' src=" + item.val().Evidencia + " >"
-                tr.appendChild(td);
-                destino.appendChild(tr);
-            });
-        }).then(function () {
-
+            td = _dce('td');
+            td.innerHTML = "<image  style='height:80px' src=" + item.val().Evidencia + " >"
+            tr.appendChild(td);
+            destino.appendChild(tr);
         });
+
+    });
+
+    // var q = firebase.database().ref("Casos").limitToFirst(15);
+    // q.once("value")
+    //     .then(function (result) {
+    //         result.forEach(function (item) {
+
+    //         });
+    //     }).then(function () {
+
+    //     });
 }
 
 
 ListarMesaje();
-CargarCasos();
+//CargarCasos();
