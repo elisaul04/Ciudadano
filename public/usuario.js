@@ -112,10 +112,10 @@ function GetValueControlById(el) {
     return document.createElement(el);
 }
 function InsertCaso() {
-    let comentario = GetValueControlById("txtComentario");
-    let longitud = GetValueControlById("txtLongitud");
-    let latitud = GetValueControlById("txtLatitud");
-    let titulo = GetValueControlById("txtTitulo");
+    let comentario = document.getElementById("txtComentario").value;
+    let longitud =  document.getElementById("txtLongitud").value;
+    let latitud =  document.getElementById("txtLatitud").value;
+    let titulo =  document.getElementById("txtTitulo".value);
     let today = new Date().toISOString().slice(0, 10)
     var caso = {
         Comentario: comentario,

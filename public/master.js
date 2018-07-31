@@ -23,9 +23,7 @@ function AgregarMenu() {
         ' <li class="nav-item">' +
         '   <a class="nav-link" href="Login.html">Registrar Caso</a>' +
         '  </li>' +
-        ' <li class="nav-item">' +
-        ' <a class="nav-link" href="">Contacto</a>' +
-        ' </li>' +
+         
         '</ul>' +
         ' </div>' +
         '</nav>' +

@@ -63,6 +63,7 @@ function _dce(el) {
 }
 $("#uploadImage").change(function () {
     readURL(this);
+  
 });
 function CargarImagen() {
     var imgFullURL = $('imgConfiguracion');
@@ -70,6 +71,7 @@ function CargarImagen() {
 
     MostraImages();
     SubirImagen()
+    alert("Imagen Cargada Exitosamente")
 }
 function SubirImagen() {
     var Key = firebase.database().ref().child('Configuraciones').push().key;

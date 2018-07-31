@@ -27,25 +27,29 @@ function LoginUser() {
 
     var email = document.getElementById("UserName").value
     var password = document.getElementById("Password").value;
+    if (email != "" && password != "") {
 
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode == "auth/user-not-found") {
+                var result = confirm("Usuario no registrado se procedera a crear nuevo");
+                if (result == true) {
+                    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
 
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == "auth/user-not-found") {
-            var result = confirm("Usuario no registrado se procedera a crear nuevo");
-            if (result == true) {
-                firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-
-                    var erMsg = error.message;
-                    window.alert(erMsg)
-                });
+                        var erMsg = error.message;
+                        window.alert(erMsg)
+                    });
+                }
+            } else {
+                window.alert(errorMessage) //+ " cdde " + errorCode)
             }
-        } else {
-            window.alert(errorMessage) //+ " cdde " + errorCode)
-        }
 
-    });
+        });
+    } else {
+        alert("Usuario y Contrasena requerida")
+    }
+
 }
 
